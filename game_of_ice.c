@@ -13,7 +13,7 @@ typedef union {
         struct {
                 Uint8 a, r, g, b;
         };
-} bleahpx;
+} px_t;
 
 SDL_Surface *init_display(void)
 {
@@ -48,8 +48,8 @@ inline void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
 }
 
 inline void addpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
-        bleahpx ap = *((bleahpx *)&pixel);
-        bleahpx *bp = &(((bleahpx *)surface->pixels)[y * surface->w + x]);
+        px_t ap = *((px_t *)&pixel);
+        px_t *bp = &(((px_t *)surface->pixels)[y * surface->w + x]);
 
         bp->a = (255 - ap.a) < bp->a ? 255 : ap.a + bp->a;
         bp->r = (255 - ap.r) < bp->r ? 255 : ap.r + bp->r;
@@ -58,8 +58,8 @@ inline void addpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
 }
 
 inline void subpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
-        bleahpx ap = *((bleahpx *)&pixel);
-        bleahpx *bp = &(((bleahpx *)surface->pixels)[y * surface->w + x]);
+        px_t ap = *((px_t *)&pixel);
+        px_t *bp = &(((px_t *)surface->pixels)[y * surface->w + x]);
 
         bp->a = ap.a > bp->a ? 0 : bp->a - ap.a;
         bp->r = ap.r > bp->r ? 0 : bp->r - ap.r;

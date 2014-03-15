@@ -83,7 +83,6 @@ Uint8 *new_gamestate(int a_sz, int b_sz)
         for(j=0; j < b_sz; j++)
         for(i=0; i < a_sz; i++)
         {
-                //a[i + j*(a_sz/8)] = (Uint32)(lrand48() & 0x11111111);
                 a[i + j*(a_sz)] = 0;
         }
 
@@ -98,7 +97,6 @@ inline void draw_state(SDL_Surface *s, Uint8 *a)
         for(j = 0; j < QARR_SZ; j++)
         for(i = 0; i < PARR_SZ; i++)
         {
-                //addpixel(s, i/2, j/2, a[i + j*PARR_SZ] ? 0x1f1f1f : 0);
                 subpixel(s, i, j, 0x030201);
                 addpixel(s, i, j, a[i + j*PARR_SZ] ? 0xffffff : 0);
         }
@@ -157,7 +155,6 @@ int main(int argc, char **argv)
         SDL_Surface *s;
         SDL_Event event;
         int skip_count = 0;
-        //char ofilename[128];
 
         Uint8 *a, *b;
 
@@ -187,18 +184,12 @@ int main(int argc, char **argv)
 
                 if(skip_count % 2 == 0)
                 {
-                        //SDL_FillRect(s, NULL, 0);
                         draw_state(s, a);
                         SDL_Flip(s);
-                        //sprintf(ofilename, "subf/bleah%06d.bmp", skip_count);
-                        //SDL_SaveBMP(s, ofilename);
                         skip_count = 0;
                 } else if(skip_count % 1 == 0) {
-                        //SDL_FillRect(s, NULL, 0);
                         draw_state(s, b);
                         SDL_Flip(s);
-                        //sprintf(ofilename, "subf/bleah%06d.bmp", skip_count);
-                        //SDL_SaveBMP(s, ofilename);
                 }
 
         }

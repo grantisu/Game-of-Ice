@@ -1,8 +1,3 @@
-/*
- * Compiled with:
- * gcc $(sdl-config --cflags --libs) -std=c99 -march=native -O3 game_of_ice.c -fopenmp -fms-extensions
- *
- */
 #include <omp.h>
 #include "SDL.h"
 #include <math.h>

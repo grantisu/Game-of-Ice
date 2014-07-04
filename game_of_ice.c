@@ -92,13 +92,17 @@ Uint8 *new_gamestate(int a_sz, int b_sz)
 inline void draw_state(SDL_Surface *s, Uint8 *a)
 {
         int i, j;
+	Uint32 red_color, white_color;
+
+	red_color = SDL_MapRGB(s->format, 3, 2, 1);
+	white_color = SDL_MapRGB(s->format, 255, 255, 255);
 
         #pragma omp for 
         for(j = 0; j < QARR_SZ; j++)
         for(i = 0; i < PARR_SZ; i++)
         {
-                subpixel(s, i, j, 0x030201);
-                addpixel(s, i, j, a[i + j*PARR_SZ] ? 0xffffff : 0);
+                subpixel(s, i, j, red_color);
+                addpixel(s, i, j, a[i + j*PARR_SZ] ? white_color : 0);
         }
 }
 

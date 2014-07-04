@@ -31,14 +31,6 @@ SDL_Surface *init_display(void)
                 exit(-1);
         }
 
-        SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-        SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
-        SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
-        SDL_EventState(SDL_JOYAXISMOTION, SDL_IGNORE);
-        SDL_EventState(SDL_JOYBALLMOTION, SDL_IGNORE);
-        SDL_EventState(SDL_JOYBUTTONUP, SDL_IGNORE);
-        SDL_EventState(SDL_JOYBUTTONDOWN, SDL_IGNORE);
-
         return screen;
 }
 

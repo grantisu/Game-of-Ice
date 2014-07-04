@@ -1,4 +1,3 @@
-#include <omp.h>
 #include "SDL.h"
 #include <math.h>
 #include <stdio.h>
@@ -97,7 +96,6 @@ inline void draw_state(SDL_Surface *s, Uint8 *a)
 	red_color = SDL_MapRGB(s->format, 3, 2, 1);
 	white_color = SDL_MapRGB(s->format, 255, 255, 255);
 
-        #pragma omp for 
         for(j = 0; j < QARR_SZ; j++)
         for(i = 0; i < PARR_SZ; i++)
         {
@@ -110,14 +108,12 @@ void seed_gamestate(Uint8 *a)
 {
         int i, j;
 
-        #pragma omp for 
         for(j=0; j < QARR_SZ; j++)
         {
                 a[j*PARR_SZ] = lrand48() & 0x1;
                 a[PARR_SZ + j*PARR_SZ - 1] = lrand48() & 0x1;
         }
 
-        #pragma omp for 
         for(i=0; i < PARR_SZ; i++)
         {
                 a[i] = lrand48() & 0x1;
@@ -131,7 +127,6 @@ void run_game(const Uint8 *restrict a, Uint8 *restrict b)
         int i, j, o, t;
 
 
-        #pragma omp for 
         for(j=1; j < QARR_SZ-1; j++)
         for(i=1; i < PARR_SZ-1; i++)
         {
@@ -176,13 +171,10 @@ int main(int argc, char **argv)
                         break;
                 }
 
-                #pragma omp parallel shared(a, b)
-                {
-                        seed_gamestate(a);
-                        run_game(a, b);
-                        seed_gamestate(b);
-                        run_game(b, a);
-                }
+                seed_gamestate(a);
+                run_game(a, b);
+                seed_gamestate(b);
+                run_game(b, a);
 
                 skip_count++;
 

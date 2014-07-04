@@ -1,5 +1,10 @@
 #ifdef EMSCRIPTEN
-#include <emscripten.h>
+	#include <emscripten.h>
+	#define PARR_SZ 640
+	#define QARR_SZ 360
+#else
+	#define PARR_SZ 1280
+	#define QARR_SZ 720
 #endif
 
 #include "SDL.h"
@@ -7,9 +12,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-#define PARR_SZ 1280
-#define QARR_SZ 720
 
 unsigned int _lame_val = 1001;
 static inline int lame_rand(void) {

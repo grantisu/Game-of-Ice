@@ -7,6 +7,12 @@
 #define PARR_SZ 1280
 #define QARR_SZ 720
 
+unsigned int _lame_val = 1001;
+static inline int lame_rand(void) {
+	_lame_val = _lame_val * 1664525 + 1013904223;
+	return _lame_val >> 8;
+}
+
 typedef union {
         Uint32 c;
         struct {
@@ -102,14 +108,14 @@ void seed_gamestate(Uint8 *a)
 
         for(j=0; j < QARR_SZ; j++)
         {
-                a[j*PARR_SZ] = lrand48() & 0x1;
-                a[PARR_SZ + j*PARR_SZ - 1] = lrand48() & 0x1;
+                a[j*PARR_SZ] = lame_rand() & 0x1;
+                a[PARR_SZ + j*PARR_SZ - 1] = lame_rand() & 0x1;
         }
 
         for(i=0; i < PARR_SZ; i++)
         {
-                a[i] = lrand48() & 0x1;
-                a[i + (QARR_SZ-1)*PARR_SZ] = lrand48() & 0x1;
+                a[i] = lame_rand() & 0x1;
+                a[i + (QARR_SZ-1)*PARR_SZ] = lame_rand() & 0x1;
         }
 
 }
@@ -149,7 +155,6 @@ int main(int argc, char **argv)
 
         Uint8 *a, *b;
 
-        srand48(0);
         s = init_display();
         SDL_FillRect(s, NULL, 0);
 

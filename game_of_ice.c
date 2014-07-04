@@ -147,48 +147,51 @@ void run_game(const Uint8 *restrict a, Uint8 *restrict b)
 
 }
 
+SDL_Surface *s_global;
+SDL_Event event;
+int skip_count = 0;
+Uint8 *a_global, *b_global;
+
+void game_iter(void) {
+	SDL_PollEvent(&event);
+	if(event.type == SDL_KEYDOWN \
+	&& event.key.keysym.sym == SDLK_q) {
+		SDL_Quit();
+	}
+
+	seed_gamestate(a_global);
+	run_game(a_global, b_global);
+	seed_gamestate(b_global);
+	run_game(b_global, a_global);
+
+	skip_count++;
+
+	if(skip_count % 2 == 0)
+	{
+		draw_state(s_global, a_global);
+		SDL_Flip(s_global);
+		skip_count = 0;
+	} else if(skip_count % 1 == 0) {
+		draw_state(s_global, b_global);
+		SDL_Flip(s_global);
+	}
+}
+
 int main(int argc, char **argv)
 {
-        SDL_Surface *s;
-        SDL_Event event;
-        int skip_count = 0;
+        s_global = init_display();
+        SDL_FillRect(s_global, NULL, 0);
 
-        Uint8 *a, *b;
-
-        s = init_display();
-        SDL_FillRect(s, NULL, 0);
-
-        a = new_gamestate(PARR_SZ, QARR_SZ);
-        b = new_gamestate(PARR_SZ, QARR_SZ);
+        a_global = new_gamestate(PARR_SZ, QARR_SZ);
+        b_global = new_gamestate(PARR_SZ, QARR_SZ);
 
         while(1)
-        {       SDL_PollEvent(&event);
-                if(event.type == SDL_KEYDOWN \
-                        && event.key.keysym.sym == SDLK_q) {
-                        break;
-                }
-
-                seed_gamestate(a);
-                run_game(a, b);
-                seed_gamestate(b);
-                run_game(b, a);
-
-                skip_count++;
-
-                if(skip_count % 2 == 0)
-                {
-                        draw_state(s, a);
-                        SDL_Flip(s);
-                        skip_count = 0;
-                } else if(skip_count % 1 == 0) {
-                        draw_state(s, b);
-                        SDL_Flip(s);
-                }
-
+        {
+		game_iter();
         }
 
-        free(a);
-        free(b);
+        free(a_global);
+        free(b_global);
 
         return 0;
 }

@@ -34,11 +34,11 @@ SDL_Surface *init_display(void)
         return screen;
 }
 
-inline void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
+static inline void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
         ((Uint32 *)surface->pixels)[y * surface->w + x] = pixel;
 }
 
-inline void addpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
+static inline void addpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
         px_t ap = *((px_t *)&pixel);
         px_t *bp = &(((px_t *)surface->pixels)[y * surface->w + x]);
 
@@ -48,7 +48,7 @@ inline void addpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
         bp->b = (255 - ap.b) < bp->b ? 255 : ap.b + bp->b;
 }
 
-inline void subpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
+static inline void subpixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
         px_t ap = *((px_t *)&pixel);
         px_t *bp = &(((px_t *)surface->pixels)[y * surface->w + x]);
 
@@ -80,7 +80,7 @@ Uint8 *new_gamestate(int a_sz, int b_sz)
         return a;
 }
 
-inline void draw_state(SDL_Surface *s, Uint8 *a)
+static inline void draw_state(SDL_Surface *s, Uint8 *a)
 {
         int i, j;
 	Uint32 red_color, white_color;

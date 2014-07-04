@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=700px, user-scalable=yes">
+  <title>Game of Ice</title>
+  <style id='theCSS'>
+body {
+	color: #eee;
+	background-color: #012;
+	text-align: center;
+	font-family: Palatino, "Times New Roman", Times, serif;
+	margin: auto;
+	padding: 0;
+}
+
+ul {
+	margin: 1.1em auto;
+	display: block;
+	width: 12em;
+	text-align: left;
+}
+
+a { color: #aaf; }
+a:hover { color: #79f; }
+a:visited { color: #57f; }
+
+#theFooter {
+	margin-top: 2.5em;
+}
+
+  </style>
+</head>
+<body>
+<h1>Game of Ice</h1>
+
+<div class="emscripten_container">
+  <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+</div>
+<script type="text/javascript">
+  var Module = {};
+  Module.canvas = document.getElementById('canvas');
+</script>
+<script async type="text/javascript" src="goi.js"></script>
+
+<div id="seeAlso">
+More info:
+  <ul>
+  <li><a href="https://github.com/grantisu/Game-of-Ice/tree/emscripten">GitHub repo</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway's Game of Life</a></li>
+  <li><a href="https://github.com/kripken/emscripten">Emscripten</a></li>
+  </ul>
+</div>
+
+<div id="theFooter">&copy; Grant Mathews</div>
+</body>
+</html>

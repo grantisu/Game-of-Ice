@@ -16,7 +16,6 @@ Or view an [emscripted]( https://github.com/kripken/emscripten ) version here:
 **WARNING**: you're currently on the expiremental emscripten branch, which
 *will* be be rebased.
 
-If you want to compile Game of Ice for your browser, checkout [Emscripten](
-https://github.com/kripken/emscripten ) and try this command:
-`$PATH_TO_EMSCRIPTEN/emcc game_of_ice.c -O2 -o Game_of_Ice.html`
+If you want to compile Game of Ice for your browser, run
+`$PATH_TO_EMSCRIPTEN/emmake make goi.js` and open `goi.html`.
 

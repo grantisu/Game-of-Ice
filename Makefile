@@ -9,3 +9,5 @@ all: game_of_ice
 game_of_ice: game_of_ice.c
 	${CC} $^ -o $@ ${CFLAGS} ${LIBS}
 
+goi.js: game_of_ice.c
+	${CC} $^ -o $@ -O2

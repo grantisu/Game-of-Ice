@@ -18,5 +18,5 @@ Or view an [emscripted]( https://github.com/kripken/emscripten ) version here:
 
 If you want to compile Game of Ice for your browser, checkout [Emscripten](
 https://github.com/kripken/emscripten ) and try this command:
-`$PATH_TO_EMSCRIPTEN/emcc game_of_life.c -O2 -o Game_of_Life.html`
+`$PATH_TO_EMSCRIPTEN/emcc game_of_ice.c -O2 -o Game_of_Ice.html`
 

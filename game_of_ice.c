@@ -1,3 +1,7 @@
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
+
 #include "SDL.h"
 #include <math.h>
 #include <stdio.h>
@@ -166,6 +170,7 @@ void game_iter(void) {
 
 	skip_count++;
 
+	SDL_LockSurface(s_global);
 	if(skip_count % 2 == 0)
 	{
 		draw_state(s_global, a_global);
@@ -175,6 +180,7 @@ void game_iter(void) {
 		draw_state(s_global, b_global);
 		SDL_Flip(s_global);
 	}
+	SDL_UnlockSurface(s_global);
 }
 
 int main(int argc, char **argv)
@@ -185,10 +191,11 @@ int main(int argc, char **argv)
         a_global = new_gamestate(PARR_SZ, QARR_SZ);
         b_global = new_gamestate(PARR_SZ, QARR_SZ);
 
-        while(1)
-        {
-		game_iter();
-        }
+#ifdef EMSCRIPTEN
+	emscripten_set_main_loop(game_iter, 0, 1);
+#else
+        while(1) { game_iter(); }
+#endif
 
         free(a_global);
         free(b_global);

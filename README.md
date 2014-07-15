@@ -10,3 +10,6 @@ Here's what it looks like in action:
 [http://www.youtube.com/watch?v=qOjuTSzlkag](
 http://www.youtube.com/watch?v=qOjuTSzlkag )
 
+Or view an [emscripted]( https://github.com/kripken/emscripten ) version here:
+<http://gameofice.gmathews.com>
+
